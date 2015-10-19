@@ -1,0 +1,50 @@
+{
+	"name": "TiebaBoost",
+	"version": "1.0",
+	"manifest_version": 2,
+	"description": "author:wmydx",
+        "browser_action" : {
+            "default_icon" : "images/boost.png",
+            "default_title" : "TiebaBoost",
+            "default_popup" : "popup.html"
+        },
+        "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    },
+	"content_scripts" : [
+		{
+			"matches" : ["*://tieba.baidu.com/f?*"],
+			"js" : ["js/frontfilter.js"],
+			"run_at" : "document_end"
+		},
+		{
+			"matches" : ["*://tieba.baidu.com/p/*"],
+			"js" : ["js/postfilter.js"],
+			"run_at" : "document_end"
+		},
+                {
+			"matches" : ["*://tieba.baidu.com/p/*"],
+			"js" : ["js/insidefilter.js"],
+			"run_at" : "document_end"
+		},
+                {
+			"matches" : ["*://tieba.baidu.com/i/*/replyme"],
+			"js" : ["js/replymefilter.js"],
+			"run_at" : "document_end"
+		},
+                {
+			"matches" : ["*://tieba.baidu.com/i/*/atme"],
+			"js" : ["js/atmefilter.js"],
+			"run_at" : "document_end"
+		}
+	],
+	"options_page": "option.html",
+	"permissions" : [
+		"tabs",
+		"*://tieba.baidu.com/",
+		"webRequest",
+    "storage"
+	]
+}
